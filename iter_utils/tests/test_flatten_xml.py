@@ -22,7 +22,7 @@ xml_string = '''
  </glossary>
 '''
 
-def test_flatten_xml_using_xmltodict_library():
+def test_flatten_using_xmltodict_library():
     try:
         import xmltodict
     except:
@@ -35,19 +35,23 @@ def test_flatten_xml_using_xmltodict_library():
 
     check = ['glossary.title', 'glossary.GlossDiv.title',
              'glossary.GlossDiv.GlossList.GlossEntry.GlossTerm', 'glossary.GlossDiv.GlossList.GlossEntry.Acronym', 'glossary.GlossDiv.GlossList.GlossEntry.Abbrev',
-             'glossary.GlossDiv.GlossList.GlossEntry.GlossSee', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso']
+             'glossary.GlossDiv.GlossList.GlossEntry.GlossSee', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso',
+             'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso']
     
     assert check == results
 
-def test_flatten_xml_using_flatten_xml():
+def test_flatten_using_flatten_xml():
     results = []
-    for k, _ in flatten_xml(xml_string):
+    flattened = flatten_xml(xml_string)
+    for k, _ in flattened:
         results.append(k)
 
     check = ['glossary.title', 'glossary.GlossDiv.title',
              'glossary.GlossDiv.GlossList.GlossEntry.GlossTerm', 'glossary.GlossDiv.GlossList.GlossEntry.Acronym', 'glossary.GlossDiv.GlossList.GlossEntry.Abbrev',
-             'glossary.GlossDiv.GlossList.GlossEntry.GlossSee', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso']
+             'glossary.GlossDiv.GlossList.GlossEntry.GlossSee', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso',
+             'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso']
     
+    assert len(results) == flattened.length
     assert results == check
     for a, b in zip(results, check):
         assert a == b

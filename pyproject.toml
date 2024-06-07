@@ -17,7 +17,7 @@ keywords = ["add", "keywords", "for", "pypa"]
 classifiers = ["Programming Language :: Python"]
 
 [tool.setuptools]
-packages = ["iter_utils"]
+packages = ["iter_utils", "iter_utils.src"]
 
 [project.optional-dependencies]
 

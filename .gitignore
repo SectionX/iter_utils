@@ -1,6 +1,6 @@
 install.sh
 uninstall.sh
-instal-edit.sh
+install-edit.sh
 build/
 pyinit.egg-info
 **/__pycache__
@@ -8,3 +8,5 @@ pyinit.egg-info
 sample.xml
 script.py
 venv
+.*
+run_tests.sh

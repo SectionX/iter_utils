@@ -29,12 +29,13 @@ json_string = '''
 def test_flatten_json():
     json_dict = json.loads(json_string)
     results = []
-    for k, v in flatten(json_dict):
+    for k, _ in flatten(json_dict):
         results.append(k)
 
     check = ['glossary.title', 'glossary.GlossDiv.title', 'glossary.GlossDiv.GlossList.GlossEntry.ID', 'glossary.GlossDiv.GlossList.GlossEntry.SortAs',
              'glossary.GlossDiv.GlossList.GlossEntry.GlossTerm', 'glossary.GlossDiv.GlossList.GlossEntry.Acronym', 'glossary.GlossDiv.GlossList.GlossEntry.Abbrev',
-             'glossary.GlossDiv.GlossList.GlossEntry.GlossSee', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso']
+             'glossary.GlossDiv.GlossList.GlossEntry.GlossSee', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso',
+             'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso']
     assert results == check
 
 
