@@ -23,22 +23,23 @@ xml_string = '''
 '''
 
 def test_flatten_using_xmltodict_library():
-    try:
-        import xmltodict
-    except:
-        return
+    import xmltodict
 
     xml_dict = xmltodict.parse(xml_string)
     results = []
-    for k, _ in flatten(xml_dict):
+    flattened = flatten(xml_dict)
+    for k, _ in flattened:
+        assert isinstance(_, str) or _ is None
         results.append(k)
 
     check = ['glossary.title', 'glossary.GlossDiv.title',
-             'glossary.GlossDiv.GlossList.GlossEntry.GlossTerm', 'glossary.GlossDiv.GlossList.GlossEntry.Acronym', 'glossary.GlossDiv.GlossList.GlossEntry.Abbrev',
-             'glossary.GlossDiv.GlossList.GlossEntry.GlossSee', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso',
-             'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso']
+            'glossary.GlossDiv.GlossList.GlossEntry.GlossTerm', 'glossary.GlossDiv.GlossList.GlossEntry.Acronym', 'glossary.GlossDiv.GlossList.GlossEntry.Abbrev',
+            'glossary.GlossDiv.GlossList.GlossEntry.GlossSee', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.para', 'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso',
+            'glossary.GlossDiv.GlossList.GlossEntry.GlossDef.GlossSeeAlso']
     
+    assert len(results) == flattened.length
     assert check == results
+
 
 def test_flatten_using_flatten_xml():
     results = []
@@ -53,5 +54,27 @@ def test_flatten_using_flatten_xml():
     
     assert len(results) == flattened.length
     assert results == check
-    for a, b in zip(results, check):
-        assert a == b
+
+
+def test_flatten_xml_init():
+    import io
+    from xml.etree.ElementTree import ElementTree
+
+    strdoc = xml_string.strip()
+    bytedoc = xml_string.encode()
+    iodoc = io.BytesIO(bytedoc)
+    etreedoc = ElementTree(file=io.BytesIO(bytedoc))
+
+    assert isinstance(flatten_xml(strdoc)._doc, ElementTree)
+    assert isinstance(flatten_xml(bytedoc)._doc, ElementTree)
+    assert isinstance(flatten_xml(iodoc)._doc, ElementTree)
+    assert isinstance(flatten_xml(etreedoc)._doc, ElementTree)
+    try:
+        flatten_xml({})._doc
+    except Exception as e:
+        assert isinstance(e, AttributeError)
+
+def test_flatten_xml_update_namespace():
+    flattened = flatten_xml(xml_string)
+    assert flattened._update_namespace('', '.', 'rss') == 'rss'
+    assert flattened._update_namespace('rss', '.', 'item') == 'rss.item'

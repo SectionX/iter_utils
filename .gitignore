@@ -11,3 +11,4 @@ script.py
 venv
 .*
 run_tests.sh
+htmlcov
