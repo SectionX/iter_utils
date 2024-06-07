@@ -1,6 +1,7 @@
 install.sh
 uninstall.sh
-install-edit.sh
+install-dev.sh
+install-dev.bat
 build/
 pyinit.egg-info
 **/__pycache__
