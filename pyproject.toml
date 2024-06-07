@@ -1,0 +1,35 @@
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "iter_utils"
+version = "0.1"
+dependencies = []
+requires-python = ">=3.8"
+authors = [{name = "Eli Stoyraitis", email = "h.stoyraitis@gmail.com"}]
+maintainers = []
+description = "Iterators for common use cases"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["add", "keywords", "for", "pypa"]
+classifiers = ["Programming Language :: Python"]
+
+[tool.setuptools]
+packages = ["iter_utils"]
+
+[project.optional-dependencies]
+
+[project.urls]
+Homepage = ""
+Documentation = ""
+Repository = ""
+"Bug Tracker" = ""
+Changelog = ""
+
+[project.scripts]
+
+[project.gui-scripts]
+
+[project.entry-points]

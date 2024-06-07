@@ -1,0 +1,10 @@
+install.sh
+uninstall.sh
+instal-edit.sh
+build/
+pyinit.egg-info
+**/__pycache__
+.env
+sample.xml
+script.py
+venv
