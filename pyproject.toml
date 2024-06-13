@@ -17,16 +17,16 @@ keywords = ["add", "keywords", "for", "pypa"]
 classifiers = ["Programming Language :: Python"]
 
 [tool.setuptools]
-packages = ["iter_utils", "iter_utils.src"]
+packages = ["iter_utils", "iter_utils.src", "iter_utils/py.typed"]
 
 [project.optional-dependencies]
 
-[project.urls]
-Homepage = ""
-Documentation = ""
-Repository = ""
-"Bug Tracker" = ""
-Changelog = ""
+# [project.urls]
+# Homepage = ""
+# Documentation = ""
+# Repository = ""
+# "Bug Tracker" = ""
+# Changelog = ""
 
 [project.scripts]
 
